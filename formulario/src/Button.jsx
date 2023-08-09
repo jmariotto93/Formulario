@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from './Button.module.css'
 
-const Button = () => {
+const Button = ({onCLick}) => {
   return (
-    <button className={styles.button}>Próxima</button>
+    <button onClick={onCLick} className={styles.button}>Próxima</button>
   )
 }
 

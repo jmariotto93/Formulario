@@ -53,21 +53,40 @@ function App() {
     p4: ''
   });
 
+  const [slide, setSlide] = React.useState(0);
+  const [resultado, setResultado] = React.useState(null);
+  
   function handleChange({target}) {
     setRespostas({...respostas, [target.id]: target.value});
   }
+  
+  function resultadoFinal() {
+    const corretas = perguntas.filter(({id, resposta}) => respostas[id] === resposta);
+    setResultado(`Você acertou: ${corretas.length} de ${perguntas.length}`)
+    console.log(corretas)
+  }
+
+  function handleClick() {
+    if (slide < perguntas.length -1) {
+      setSlide(slide + 1);
+    } else {
+      setSlide(slide + 1);
+      resultadoFinal();
+    }
+  }
 
   return (
-    <form>
-      {perguntas.map((pergunta) => (
+    <form onSubmit={(event) => event.preventDefault()}>
+      {perguntas.map((pergunta, index) => (
          <Radio 
+           active={slide === index}
            key={pergunta.id} 
            value={respostas[pergunta.id]} 
            onChange={handleChange} 
            {...pergunta}/>
       ))}
+      {resultado ? <p>{resultado}</p> : <Button onCLick={handleClick}/>}
       
-      <Button />
     </form>
   );
 }

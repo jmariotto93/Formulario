@@ -1,7 +1,8 @@
 import React from 'react'
 
-const Radio = ({pergunta, options, id, onChange, value}) => {
-  return (
+const Radio = ({pergunta, options, id, onChange, value, active}) => {
+    if (active === false) return null;
+    return (
     <fieldset style={{border: '2px solid #eee', marginBottom: '1rem'}}>
         <legend style={{fontWeight: 'bold'}}>{pergunta}</legend>
         {options.map((option) => (
